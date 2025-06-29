@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>BatuSaçmalık 2.0</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #1f0036, #30007a);
+      color: #00ffe0;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding: 30px;
+      transition: 0.4s ease;
+    }
+    h1 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 10px #00ffe0;
+    }
+    #message {
+      margin: 20px auto;
+      padding: 20px;
+      border: 2px dashed #00ffe0;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.4);
+      font-size: 1.3rem;
+      width: 60%;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #00ffe0;
+      color: #1f0036;
+      border-radius: 10px;
+      margin: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe0;
+      transition: 0.3s;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #00ffe0;
+      background: #1f0036;
+      color: #00ffe0;
+      width: 250px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+      background: rgba(0,0,0,0.2);
+      border: 1px solid #00ffe0;
+      padding: 8px;
+      border-radius: 10px;
+    }
+    .dark {
+      background: #fff;
+      color: #1f0036;
+    }
+    .dark #message, .dark li {
+      background: #eee;
+      border-color: #1f0036;
+      color: #1f0036;
+    }
+    .dark button {
+      background: #1f0036;
+      color: #00ffe0;
+    }
+    .dark input {
+      background: #fff;
+      color: #1f0036;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 BatuSaçmalık 2.0 🌀</h1>
+  <div id="message">Şapşallık yükleniyor...</div>
+  <button onclick="showMessage()">Yeni Saçmalık</button>
+  <button onclick="addFavorite()">❤️ Favori Yap</button>
+  <button onclick="toggleTheme()">🌗 Tema Değiştir</button>
+  <br><br>
+  <input type="text" id="customInput" placeholder="Kendi saçmalığını yaz">
+  <button onclick="addCustomMessage()">➕ Ekle</button>
+  <h3>⭐ Favoriler</h3>
+  <ul id="favoritesList"></ul>
+
+  <script>
+    const messages = [
+      "Batu sabah kahvaltıya uzay çağırdı 🌌",
+      "Tost makinesiyle selfie çekti 📸",
+      "Ay, Batu'ya zıpladı 🌕",
+      "BatuSaçmalık: Şapşal enerjinin doruğu!",
+      "Bir gün Batu, gökkuşağını ısırdı 🎨"
+    ];
+    const userMessages = [];
+    const favorites = [];
+    let currentMessage = "";
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function showMessage() {
+      currentMessage = getRandom(messages.concat(userMessages));
+      document.getElementById("message").textContent = currentMessage;
+    }
+
+    function addFavorite() {
+      if (currentMessage && !favorites.includes(currentMessage)) {
+        favorites.push(currentMessage);
+        const li = document.createElement("li");
+        li.textContent = currentMessage;
+        document.getElementById("favoritesList").appendChild(li);
+      }
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+    }
+
+    function addCustomMessage() {
+      const input = document.getElementById("customInput");
+      const msg = input.value.trim();
+      if (msg) {
+        userMessages.push(msg);
+        input.value = "";
+        alert("Yeni saçmalık eklendi!");
+      }
+    }
+
+    showMessage();
+  </script>
+</body>
+</html>
